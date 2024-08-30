@@ -231,8 +231,10 @@ $offset = ($page - 1) * $limit;
                                 echo "<button class ='w-12 h-12 rounded-full  shadow-xl shadow-[#17082D]  border-2 border-[#17082D]  text-xl font-bold  bg-[#17082D] text-white duration-500 ml-2'>$i</button>";
                             } else {
                                 echo "<a href='user.php?page=$i'><button class ='w-12 h-12 border-2 rounded-full  border-[#17082D] shadow-xl shadow-[#17082D]   text-xl font-bold text-[#17082D]   hover:bg-[#17082D] hover:text-white duration-500 ml-2'>$i</button></a>";
-                            }
+                            };
+                             
                         }
+                         
                         ?>
 
 

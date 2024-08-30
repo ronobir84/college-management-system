@@ -1,15 +1,40 @@
  <?php include "./partials/Header.php" ?>;
 
+ <?php 
+ if (isset($_SESSION['user_data'])) {
+        echo "<script>window.location.href='http://localhost/Collage/admin/index.php'</script>";
+ }
+ 
+ 
+ ?>
+
+<?php 
+if (isset($_POST['login'])) {
+    $email = mysqli_real_escape_string($database, $_POST['email']);
+    $password = mysqli_real_escape_string($database, $_POST['password']);
+    $sql = "SELECT * FROM users WHERE user_email = '$email' AND user_password = '$password'";
+    $query = mysqli_query($database, $sql);
+    $data = mysqli_num_rows($query);
+    if ($data) {
+        $result = mysqli_fetch_assoc($query);
+        $user_data = array($result['user_id'], $result['user_name'], $result['user_role']);
+        $_SESSION['user_data'] = $user_data;
+        echo "<script>window.location.href='./admin/index.php'</script>";
+    }else{
+        $_SESSION['error'] = 'Invalid Email/Password!!';
+        "<script>window.location.href='Admin_login.php'</script>";
+    }
+}
+?>
 
 
-
- <div class="w-[800px] h-[600px] bg-[#17082D] mx-auto relative top-10 overflow-hidden ">
+ <div class="w-[800px] h-[500px] bg-[#17082D] mx-auto relative top-8  overflow-hidden ">
      <div class="">
 
      </div>
-     <div class="w-[650px]  bg-white mx-auto relative top-16 p-10 shadow-md shrink rounded-sm ">
+     <div class="w-[650px] h-[350px]  bg-white mx-auto relative top-20 p-10 shadow-md shrink rounded-sm ">
          <h2 id="title_font" class="text-2xl font-bold text-[#17082D] text-center ">Admin Login</h2>
-         <form method="post" action="">
+         <form class="space-y-4 pt-6" method="post" action="">
 
              <div class=" pt-3">
 

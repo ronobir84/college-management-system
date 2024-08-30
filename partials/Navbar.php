@@ -25,7 +25,7 @@
                     </a>
                 </div>
                 <div class="flex gap-2 pt-3">
-                    <img class="w-24" src="https://www.neticms.com/9e6458ab824a0ac53ed377c2db994ed4.png" alt="">
+                    <img class="w-24" src="https://foodtank.com/wp-content/uploads/2021/07/alfons-morales-YLSwjSy7stw-unsplash.jpg" alt="">
                     <img class="w-24" src="https://www.neticms.com/2b43734798fd57a3d58f86901947fcbb.png" alt="">
 
                 </div>
