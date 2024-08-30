@@ -188,7 +188,7 @@
                                         Gallery
                                     </a>
                                     <a href=" " class="block px-4 py-2 text-base text-center font-semibold text-white  hover:text-[#309267] hover:bg-[#17082D] ">Institute Notice</a>
-                                    <a href=" " class="block px-4 py-2 text-base text-center font-semibold text-white  hover:text-[#309267] hover:bg-[#17082D]"> Download Corner</a>
+                                    <a href="./Admin_login.php" class="block px-4 py-2 text-base text-center font-semibold text-white  hover:text-[#309267] hover:bg-[#17082D]">Admin Login</a>
 
 
 

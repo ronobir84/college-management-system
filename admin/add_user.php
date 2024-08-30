@@ -105,7 +105,7 @@ $_SESSION['message'] = $error;
                     <div class="relative">
                         <input name="confirm_pass" placeholder="confirm Password" :type="show ? 'password' : 'text'" class=" rounded-md  text-black border-2 border-gray-300 px-4   py-2.5 w-full  focus:ring-1 focus:ring-purple-400 transition ease-in-out duration-150">
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
-                            <svg class="h-6 text-gray-700" fill="none" @click="show = !show"
+                            <svg class="h-6 text-gray-700 cursor-pointer" fill="none" @click="show = !show"
                                 :class="{'block': !show, 'hidden':show }" xmlns="http://www.w3.org/2000/svg"
                                 viewbox="0 0 640 512">
                                 <path fill="currentColor"
@@ -113,7 +113,7 @@ $_SESSION['message'] = $error;
                                 </path>
                             </svg>
 
-                            <svg class="h-6 text-gray-700" fill="none" @click="show = !show"
+                            <svg class="h-6 text-gray-700 cursor-pointer" fill="none" @click="show = !show"
                                 :class="{'hidden': !show, 'block':show }" xmlns="http://www.w3.org/2000/svg"
                                 viewbox="0 0 576 512">
                                 <path fill="currentColor"
