@@ -37,7 +37,7 @@
     <div class="w-full h-12 bg-[#17082dd6]">
 
         <div class="items-center justify-between w-full lg:flex lg:w-auto px-16">
-            <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-14 lg:mt-0 py-3">
+            <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-14 lg:mt-0 py-3 ">
                 <li>
                     <a href="#" class="text-lg  text-white font-bold hover:text-[#309267] duration-500">Home</a>
                 </li>

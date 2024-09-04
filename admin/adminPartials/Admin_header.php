@@ -1,7 +1,11 @@
  <?php
     session_start();
     $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 1);
-    include "../database.php"
+    include "../database.php";
+
+    if (!isset($_SESSION['user_data'])) {
+        header("location:http://localhost/Collage/Admin_login.php");
+    }
 
 
 
@@ -34,7 +38,7 @@
      <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
- 
+
  </head>
 
 
@@ -173,7 +177,7 @@
                          </details>
                      </li>
                      <li>
-                         <a class="flex  gap-3 px-2 items-center  py-1.5  text-white rounded-sm hover:bg-[#309267]  duration-500 w-36 " href="teacher/teacher.php">
+                         <a class="flex  gap-3 px-2 items-center  py-1.5  text-white rounded-sm hover:bg-[#309267]  duration-500 w-36 <?= $page == "teacher.php" ? 'active' : ''; ?>" href="teacher.php">
                              <i class="fa-solid fa-user-tie"></i>
                              <button class="text-lg font-semibold ">Teachers</button>
                          </a>
@@ -233,7 +237,12 @@
                              <!-- 1 -->
                              <div class="flex gap-4 items-center relative right-4">
                                  <h3 class="text-lg text-white  font-semibold">
-                                     Admin
+                                     <?php
+                                        if (isset($_SESSION['user_data'])) {
+                                            echo $_SESSION['user_data'][1];
+                                        }
+
+                                        ?>
 
                                  </h3>
                                  <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" class="flex text-sm bg-gray-800 rounded-full md:me-0 " type="button">
@@ -253,7 +262,7 @@
                                          <a href="#" class="block px-4 py-2 hover:bg-[#309267]  duration-500  ">Settings</a>
                                      </li>
                                      <li>
-                                         <a href=" " class="block px-4 py-2 hover:bg-[#309267]  duration-500  ">Logout</a>
+                                         <a href="Logout.php" class="block px-4 py-2 hover:bg-[#309267]  duration-500  ">Logout</a>
                                      </li>
                                  </ul>
 

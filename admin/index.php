@@ -1,5 +1,5 @@
 <?php include "./adminPartials/Admin_header.php" ?>
-<div class="bg-[#E5ECFF] w-full min-h-screen shadow-lg ">
+<div class="bg-[#E5ECFF] w-full overflow-hidden pb-10 shadow-lg ">
    <div class="px-4 pt-3">
       <div class="flex justify-between">
          <div>
