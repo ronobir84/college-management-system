@@ -85,17 +85,17 @@ $_SESSION['message'] = $error;
         <form method="post" action="">
             <div class=" pt-3">
 
-                <input name="username" placeholder="username" class=" rounded-md  text-black border-2 border-gray-300 px-4   py-2.5 w-full  focus:ring-1 focus:ring-purple-400 transition ease-in-out duration-150" type="text">
+                <input required name="username" placeholder="username" class=" rounded-md  text-black border-2 border-gray-300 px-4   py-2.5 w-full  focus:ring-1 focus:ring-purple-400 transition ease-in-out duration-150" type="text">
 
             </div>
             <div class=" pt-3">
 
-                <input name="email" placeholder="user email" class=" rounded-md  text-black border-2 border-gray-300 px-4   py-2.5 w-full  focus:ring-1 focus:ring-purple-400 transition ease-in-out duration-150" type="email">
+                <input required name="email" placeholder="user email" class=" rounded-md  text-black border-2 border-gray-300 px-4   py-2.5 w-full  focus:ring-1 focus:ring-purple-400 transition ease-in-out duration-150" type="email">
 
             </div>
             <div class=" pt-3">
 
-                <input name="password" placeholder="password" class=" rounded-md  text-black border-2 border-gray-300 px-4   py-2.5 w-full  focus:ring-1 focus:ring-purple-400 transition ease-in-out duration-150" type="password">
+                <input required name="password" placeholder="password" class=" rounded-md  text-black border-2 border-gray-300 px-4   py-2.5 w-full  focus:ring-1 focus:ring-purple-400 transition ease-in-out duration-150" type="password">
 
             </div>
             <div class=" pt-3">
@@ -103,7 +103,7 @@ $_SESSION['message'] = $error;
                 <div class="" x-data="{ show: true }">
 
                     <div class="relative">
-                        <input name="confirm_pass" placeholder="confirm Password" :type="show ? 'password' : 'text'" class=" rounded-md  text-black border-2 border-gray-300 px-4   py-2.5 w-full  focus:ring-1 focus:ring-purple-400 transition ease-in-out duration-150">
+                        <input required name="confirm_pass" placeholder="confirm Password" :type="show ? 'password' : 'text'" class=" rounded-md  text-black border-2 border-gray-300 px-4   py-2.5 w-full  focus:ring-1 focus:ring-purple-400 transition ease-in-out duration-150">
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                             <svg class="h-6 text-gray-700 cursor-pointer" fill="none" @click="show = !show"
                                 :class="{'block': !show, 'hidden':show }" xmlns="http://www.w3.org/2000/svg"
@@ -134,7 +134,7 @@ $_SESSION['message'] = $error;
 
 
 
-                <select name="role" class=" border-2 border-gray-300 placeholder:text-gray-600  text-gray-600    py-2.5 w-full  px-3  " id="">
+                <select required name="role" class=" border-2 border-gray-300 placeholder:text-gray-600  text-gray-600    py-2.5 w-full  px-3  " id="">
                     <option value="">Select Role</option>
                     <option value="1">Admin</option>
                     <option value="2">Teacher</option>

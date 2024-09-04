@@ -1,7 +1,7 @@
 <?php require_once('./adminPartials/Admin_header.php') ?>
 
 
-<? ?>
+ 
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -29,12 +29,14 @@
 
             if(isset($_SESSION['error_sms'])){
                 $error_sms = $_SESSION['error_sms'];
-                echo $error_sms;
+                echo "<span class='text-xl font-semibold text-green-700 relative  top-2'>$error_sms</span>";
+                unset($_SESSION['error_sms']);
 
             }
             if (isset($_SESSION['error_msg'])) {
                 $error_msg = $_SESSION['error_msg'];
-                echo $error_msg;
+                echo "<span class='text-xl font-semibold text-red-700 relative  top-2'>$error_msg</span>";
+                unset($_SESSION['error_msg']);
             }
 
 
@@ -71,7 +73,7 @@
                             <th><span class="text-lg text-[#309267] font-bold">Name</span></th>
                             <th><span class="text-lg text-[#309267] font-bold">Email</span></th>
 
-                            <th><span class="text-lg text-[#309267] font-bold">image</span></th>
+                            <th><span class="text-lg text-[#309267] font-bold">Subject</span></th>
                             <th><span class="text-lg text-[#309267] font-bold">Category</span></th>
 
                             <th colspan="2"><span class="text-xl text-[#309267] font-bold">Action</span></th>
@@ -82,7 +84,7 @@
 
 
                         <?php
-                        $sql = "SELECT * FROM teachers";
+                        $sql = "SELECT * FROM teachers LEFT JOIN subjects ON teachers.teacher_subject = subjects.subject_id";
                         $query = mysqli_query($database, $sql);
                         $rows = mysqli_num_rows($query);
                         if ($rows) {
@@ -101,7 +103,7 @@
                                     <td class="text-lg text-black font-semibold"><?php echo $row['teacher_id'] ?></td>
                                     <td class="text-lg text-black font-semibold"><?php echo $row['teacher_name'] ?> </td>
                                     <td class="text-lg text-black font-semibold"><?php echo $row['teacher_email'] ?></td>
-                                    <td class="text-lg text-black font-semibold"><?php echo $row['teacher_image'] ?></td>
+                                    <td class="text-lg text-black font-semibold"><?php echo $row['subject_name']?></td>
                                     <td class="text-lg text-black font-semibold"><?php
                                                                                     if ($row['teacher_category'] == 1) {
                                                                                         echo "Principal";

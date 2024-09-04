@@ -183,7 +183,7 @@
                          </a>
                      </li>
                      <li>
-                         <a class="flex  gap-3 px-2 items-center  py-1.5  text-white rounded-sm hover:bg-[#309267] duration-500] duration-500   w-36 " href="">
+                         <a class="flex  gap-3 px-2 items-center  py-1.5  text-white rounded-sm hover:bg-[#309267] duration-500] duration-500   w-36 <?= $page == "subject.php" ? 'active' : ''; ?>" href="subject.php">
                              <i class="fa-solid fa-book-open"></i>
                              <button class="text-lg font-semibold ">Subjects</button>
                          </a>
