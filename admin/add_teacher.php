@@ -1,7 +1,21 @@
-<?php require_once("./adminPartials/Admin_header.php") ?>;
+<?php require_once("./adminPartials/Admin_header.php") ?>
 
 
 <?php 
+
+if (isset($_POST['add_teacher'])) {
+    $teacher_name = mysqli_real_escape_string($database, $_POST['teacher_name']);
+    $teacher_email = mysqli_real_escape_string($database, $_POST['teacher_email']);
+
+    // image uploaded commend
+    $file_name = $_FILES['teacher_image']['name'];
+    $tmp_name = $_FILES['teacher_image']['tmp_name'];
+    $size = $_FILES['teacher_image']['size'];
+    $image_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+    $allow_type = ['jpg', 'png', 'jpeg'];
+    $destination
+     
+}
 
 
 
