@@ -17,6 +17,10 @@ if (isset($_POST['add_teacher'])) {
 
     $category = mysqli_real_escape_string($database, $_POST['category']);
     
+    if (is_array($size <= 2000000)) {
+        move_uploaded_file($tmp_name, $destination);
+        $sql = "INSERT INTO teachers(teacher_name,  teacher_email, teacher_image, teacher_category) VALUES ('   $teacher_name',' $teacher_email','$file_name','$category')";
+    }
 
      
 }
