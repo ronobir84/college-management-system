@@ -1,7 +1,7 @@
 <?php require_once('./adminPartials/Admin_header.php') ?>
 
 
-
+<? ?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -25,7 +25,21 @@
 
 
 
+            <?php
 
+            if(isset($_SESSION['error_sms'])){
+                $error_sms = $_SESSION['error_sms'];
+                echo $error_sms;
+
+            }
+            if (isset($_SESSION['error_msg'])) {
+                $error_msg = $_SESSION['error_msg'];
+                echo $error_msg;
+            }
+
+
+
+            ?>
 
 
 
@@ -66,69 +80,13 @@
                     <tbody>
 
 
-                        <tr class="text-center">
-                            <td class="text-lg text-black font-semibold">1001 </td>
-                            <td class="text-lg text-black font-semibold">Test </td>
-                            <td class="text-lg text-black font-semibold">test@gmail.com </td>
-                            <td class="text-lg text-black font-semibold"> www.image.bd</td>
-                            <td class="text-lg text-black font-semibold"> Assistant Professor</td>
-                            <td class="py-2">
-                                <form method="post" onsubmit="return confirm('Are You Sure You want to delete?')" action="<?php $_SERVER['PHP_SELF'] ?>">
 
-                                    <div class="group relative inline-block">
-                                        <a class="focus:outline-none pr-2" href=" ">
-                                            <i class="fa-solid fa-user-pen text-lg  w-12 h-12  p-2  duration-500 hover:bg-[#17082D] border-2 border-[#17082D] hover:text-white  text-[#17082D] rounded-full"></i>
-                                        </a>
-
-
-                                        <span
-                                            class="absolute -top-11 left-1/2 transform -translate-x-1/2 z-20 px-4 py-2 text-base font-bold text-white bg-[#17082D] rounded-lg shadow-lg transition-transform duration-300 ease-in-out scale-0 group-hover:scale-100">Edit</span>
-                                    </div>
-
-
-
-                                    <div class="group relative inline-block">
-
-                                        <input name="user_id"  type="hidden">
-                                        <button name="delete_user" value="delete" class="focus:outline-none pr-2">
-                                            <i class="fa-solid fa-trash text-lg  w-12 h-12  p-2  duration-500 hover:bg-red-700 border-2 border-red-700 hover:text-white  text-red-700 rounded-full"></i>
-                                        </button>
-
-                                        <span
-                                            class="absolute -top-11 left-1/2 transform -translate-x-1/2 z-20 px-4 py-2 text-base font-bold text-white bg-red-700 rounded-lg shadow-lg transition-transform duration-300 ease-in-out scale-0 group-hover:scale-100">Delate</span>
-                                    </div>
-
-
-
-
-
-
-                                    <div class="group relative inline-block ">
-
-
-                                        <a href=" ">
-                                            <button class="" type="button">
-
-                                                <i class="fa-solid fa-eye text-lg  w-12 h-12  p-2  duration-500 hover:bg-[#309267] border-2 border-[#309267] hover:text-white  text-[#309267] rounded-full"></i>
-
-                                            </button>
-                                        </a>
-
-
-                                        <span
-                                            class="absolute -top-11 left-1/2 transform -translate-x-1/2 z-20 px-4 py-2 text-base font-bold text-white bg-[#309267] rounded-lg shadow-lg transition-transform duration-300 ease-in-out scale-0 group-hover:scale-100">View</span>
-
-                                    </div>
-
-
-
-
-                                    <!-- Main modal -->
-
-
-
-
-                                    <!-- Main modal -->
+                        <?php
+                        $sql = "SELECT * FROM teachers";
+                        $query = mysqli_query($database, $sql);
+                        $rows = mysqli_num_rows($query);
+                        if ($rows) {
+                            while ($row = mysqli_fetch_array($query)) {
 
 
 
@@ -136,17 +94,104 @@
 
 
 
-
-                                </form>
-                            </td>
-
-                        </tr>
+                        ?>
 
 
+                                <tr class="text-center">
+                                    <td class="text-lg text-black font-semibold"><?php echo $row['teacher_id'] ?></td>
+                                    <td class="text-lg text-black font-semibold"><?php echo $row['teacher_name'] ?> </td>
+                                    <td class="text-lg text-black font-semibold"><?php echo $row['teacher_email'] ?></td>
+                                    <td class="text-lg text-black font-semibold"><?php echo $row['teacher_image'] ?></td>
+                                    <td class="text-lg text-black font-semibold"><?php
+                                                                                    if ($row['teacher_category'] == 1) {
+                                                                                        echo "Principal";
+                                                                                    } elseif ($row['teacher_category'] == 2) {
+                                                                                        echo "Assistant Professor";
+                                                                                    } elseif ($row['teacher_category'] == 3) {
+                                                                                        echo "Lecturer";
+                                                                                    }
+                                                                                    ?></td>
+                                    <td class="py-2">
+                                        <form method="post" onsubmit="return confirm('Are You Sure You want to delete?')" action="<?php $_SERVER['PHP_SELF'] ?>">
+
+                                            <div class="group relative inline-block">
+                                                <a class="focus:outline-none pr-2" href=" ">
+                                                    <i class="fa-solid fa-user-pen text-lg  w-12 h-12  p-2  duration-500 hover:bg-[#17082D] border-2 border-[#17082D] hover:text-white  text-[#17082D] rounded-full"></i>
+                                                </a>
+
+
+                                                <span
+                                                    class="absolute -top-11 left-1/2 transform -translate-x-1/2 z-20 px-4 py-2 text-base font-bold text-white bg-[#17082D] rounded-lg shadow-lg transition-transform duration-300 ease-in-out scale-0 group-hover:scale-100">Edit</span>
+                                            </div>
 
 
 
-                        
+                                            <div class="group relative inline-block">
+
+                                                <input name="user_id" type="hidden">
+                                                <button name="delete_user" value="delete" class="focus:outline-none pr-2">
+                                                    <i class="fa-solid fa-trash text-lg  w-12 h-12  p-2  duration-500 hover:bg-red-700 border-2 border-red-700 hover:text-white  text-red-700 rounded-full"></i>
+                                                </button>
+
+                                                <span
+                                                    class="absolute -top-11 left-1/2 transform -translate-x-1/2 z-20 px-4 py-2 text-base font-bold text-white bg-red-700 rounded-lg shadow-lg transition-transform duration-300 ease-in-out scale-0 group-hover:scale-100">Delate</span>
+                                            </div>
+
+
+
+
+
+
+                                            <div class="group relative inline-block ">
+
+
+                                                <a href=" ">
+                                                    <button class="" type="button">
+
+                                                        <i class="fa-solid fa-eye text-lg  w-12 h-12  p-2  duration-500 hover:bg-[#309267] border-2 border-[#309267] hover:text-white  text-[#309267] rounded-full"></i>
+
+                                                    </button>
+                                                </a>
+
+
+                                                <span
+                                                    class="absolute -top-11 left-1/2 transform -translate-x-1/2 z-20 px-4 py-2 text-base font-bold text-white bg-[#309267] rounded-lg shadow-lg transition-transform duration-300 ease-in-out scale-0 group-hover:scale-100">View</span>
+
+                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        </form>
+                                    </td>
+
+                                </tr>
+                                <tr>
+
+                                </tr>
+
+
+                            <?php  }
+                        } else {
+
+                            ?>
+
+                            <td colspan='6'>No Record Found</td>
+                        <?php
+                        }
+                        ?>
+
+
+
 
 
 

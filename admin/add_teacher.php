@@ -1,23 +1,28 @@
+<?php ob_start() ?>
+
 <?php require_once("./adminPartials/Admin_header.php") ?>
 
 
-<?php 
-
+<?php
+include "../database.php";
 if (isset($_POST['add_teacher'])) {
     $teacher_name = mysqli_real_escape_string($database, $_POST['teacher_name']);
     $teacher_email = mysqli_real_escape_string($database, $_POST['teacher_email']);
 
     // image uploaded commend
-    $file_name = $_FILES['teacher_image']['name'];
-    $tmp_name = $_FILES['teacher_image']['tmp_name'];
-    $size = $_FILES['teacher_image']['size'];
+    $file_name = $_FILES['images']['name'];
+    $tmp_name = $_FILES['images']['tmp_name'];
+    $size = $_FILES['images']['size'];
     $image_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
     $allow_type = ['jpg', 'png', 'jpeg'];
     $destination = "upload/" . $file_name;
 
     $category = mysqli_real_escape_string($database, $_POST['category']);
-    
-    if (is_array($size <= 2000000)) {
+
+    if (in_array($image_ext, $allow_type )) {
+        if ( $size <= 2000000) {
+             
+        
         move_uploaded_file($tmp_name, $destination);
         $sql = "INSERT INTO teachers(teacher_name,  teacher_email, teacher_image, teacher_category) VALUES ('   $teacher_name',' $teacher_email','$file_name','$category')";
         $query = mysqli_query($database, $sql);
@@ -27,44 +32,28 @@ if (isset($_POST['add_teacher'])) {
         if ($query) {
 
             $_SESSION['error_sms'] = "Teacher Added Successfully";
-            header("Location: teacher.php");
-        }else{
+            header("Location:add_teacher.php");
+        } 
+        else {
             $_SESSION['error_mes'] = 'Failed Please Try Agin';
+            header("Location:add_teacher.php");
         }
+        } else{
+            $_SESSION['error_img'] = "image size should be 2mb";
+            header("Location:add_teacher.php");
+        }
+    } else{
+        $_SESSION['error_file'] = "File type is not allow";
+        header("Location:add_teacher.php");
     }
 
+    
+    
      
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -90,7 +79,7 @@ if (isset($_POST['add_teacher'])) {
     </div>
     <div class="w-[650px]  bg-white mx-auto relative top-24 p-10 shadow-md shrink rounded-sm ">
         <h2 id="title_font" class="text-2xl font-bold text-[#17082D] text-center ">Add Teacher</h2>
-        <form method="post" action="">
+        <form method="post" action="" enctype="multipart/form-data">
             <div class=" pt-3">
 
                 <input name="teacher_name" placeholder="Teacher Name" class=" rounded-md  text-black border-2 border-gray-300 px-4   py-2.5 w-full  focus:ring-1   transition ease-in-out duration-150" type="text">
@@ -102,7 +91,7 @@ if (isset($_POST['add_teacher'])) {
 
             </div>
             <div class="flex justify-between pt-3">
-                <input name="teacher_image" type="file" class="w-full p-2.5 border-2 border-gray-300 cursor-pointer px-4 rounded-md">
+                <input name="images" type="file" class="w-full p-2.5 border-2 border-gray-300 cursor-pointer px-4 rounded-md">
                 <i class="fa-solid fa-user text-3xl pt-2  absolute  right-14  cursor-pointer "></i>
             </div>
             <div class="pt-3">
