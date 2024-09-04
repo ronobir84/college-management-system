@@ -20,6 +20,17 @@ if (isset($_POST['add_teacher'])) {
     if (is_array($size <= 2000000)) {
         move_uploaded_file($tmp_name, $destination);
         $sql = "INSERT INTO teachers(teacher_name,  teacher_email, teacher_image, teacher_category) VALUES ('   $teacher_name',' $teacher_email','$file_name','$category')";
+        $query = mysqli_query($database, $sql);
+
+
+
+        if ($query) {
+
+            $_SESSION['error_sms'] = "Teacher Added Successfully";
+            header("Location: teacher.php");
+        }else{
+            $_SESSION['error_mes'] = 'Failed Please Try Agin';
+        }
     }
 
      
