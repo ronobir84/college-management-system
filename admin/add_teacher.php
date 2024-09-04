@@ -13,7 +13,11 @@ if (isset($_POST['add_teacher'])) {
     $size = $_FILES['teacher_image']['size'];
     $image_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
     $allow_type = ['jpg', 'png', 'jpeg'];
-    $destination
+    $destination = "upload/" . $file_name;
+
+    $category = mysqli_real_escape_string($database, $_POST['category']);
+    
+
      
 }
 
