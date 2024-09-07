@@ -50,23 +50,23 @@ $row = mysqli_fetch_assoc($query);
                 <div>
                     <img class="w-24 h-24 mx-auto" src=".././images/profile-circle-icon-2048x2048-cqe5466q.png" alt="">
                     <div>
-                        <h2 class="text-xl text-white font-bold pt-2 text-center"><span class="text-slate-200 font-semibold">Sr.No :</span>000<?php echo $row['user_id'] ?></h2>
+                        <h2 class="text-xl font-bold text-[#17082D] pt-2 text-center"><span class=" ">Sr.No :</span>000<?php echo $row['user_id'] ?></h2>
                     </div>
                 </div>
                 <div class="space-y-1 text-center">
-                    <h2 class="text-xl font-semibold text-white"><span class="text-slate-200 font-semibold">Name : </span><?php echo $row['user_name'] ?></h2>
-                    <h2 class="text-xl font-semibold text-white"><span class="text-slate-200 font-semibold">Email : </span><?php echo $row['user_email'] ?></h2>
-                    <h2 class="text-xl font-semibold text-white"><span class="text-slate-200 font-semibold">Role :</span> <?php
-                                                                                                                            if ($row['role'] == 1) {
-                                                                                                                                echo "Admin";
-                                                                                                                            } elseif ($row['role'] == 2) {
-                                                                                                                                echo "Teacher";
-                                                                                                                            } elseif ($row['role'] == 3) {
-                                                                                                                                echo "Student";
-                                                                                                                            }
+                    <h2 class="text-xl font-bold text-[#17082D]"><span class="">Name : </span><?php echo $row['user_name'] ?></h2>
+                    <h2 class="text-xl font-bold text-[#17082D] "><span class="  ">Email : </span><?php echo $row['user_email'] ?></h2>
+                    <h2 class="text-xl font-bold text-[#17082D] "><span class=" ">Role :</span> <?php
+                                                                                                if ($row['role'] == 1) {
+                                                                                                    echo "Admin";
+                                                                                                } elseif ($row['role'] == 2) {
+                                                                                                    echo "Teacher";
+                                                                                                } elseif ($row['role'] == 3) {
+                                                                                                    echo "Student";
+                                                                                                }
 
 
-                                                                                                                            ?></h2>
+                                                                                                ?></h2>
                 </div>
 
 

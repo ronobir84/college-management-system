@@ -131,7 +131,7 @@ if (isset($_POST['delete_subject'])) {
                                             <div class="group relative inline-block ">
 
 
-                                                <a href=" ">
+                                                <a href="view_subject.php?id=<?php echo $row['subject_id']?>">
                                                     <button class="" type="button">
 
                                                         <i class="fa-solid fa-eye text-lg  w-12 h-12  p-2  duration-500 hover:bg-[#309267] border-2 border-[#309267] hover:text-white  text-[#309267] rounded-full"></i>
