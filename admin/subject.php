@@ -75,7 +75,7 @@
                                         <form method="post" onsubmit="return confirm('Are You Sure You want to delete?')" action="<?php $_SERVER['PHP_SELF'] ?>">
 
                                             <div class="group relative inline-block">
-                                                <a class="focus:outline-none pr-2" href=" ">
+                                                <a class="focus:outline-none pr-2" href="edit_subject.php?id=<?php echo $row['subject_id']?>">
                                                     <i class="fa-solid fa-user-pen text-lg  w-12 h-12  p-2  duration-500 hover:bg-[#17082D] border-2 border-[#17082D] hover:text-white  text-[#17082D] rounded-full"></i>
                                                 </a>
 
