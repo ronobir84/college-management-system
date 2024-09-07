@@ -161,7 +161,7 @@ $offset = ($page - 1) * $limit;
                                             <div class="group relative inline-block ">
 
 
-                                                <a href="user_view.php?id=<?php echo $row['user_id'] ?>">
+                                                <a href="view_user.php?id=<?php echo $row['user_id'] ?>">
                                                     <button class="" type="button">
 
                                                         <i class="fa-solid fa-eye text-lg  w-12 h-12  p-2  duration-500 hover:bg-[#309267] border-2 border-[#309267] hover:text-white  text-[#309267] rounded-full"></i>

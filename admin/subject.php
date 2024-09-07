@@ -1,6 +1,23 @@
-
-<?php ob_start()?>
+<?php ob_start() ?>
 <?php require_once('./adminPartials/Admin_header.php') ?>
+
+<?php
+
+if (isset($_POST['delete_subject'])) {
+    $subject_id = $_POST['subject_id'];
+    $sql2 = "DELETE FROM subjects WHERE subject_id = '$subject_id' ";
+    $query2 = mysqli_query($database, $sql2);
+    if ($query2) {
+        $_SESSION['delete_succ'] = "Subject Has Been Deleted Successful";
+    } else {
+        $_SESSION['delete_error'] = "Failed Please Try Again";
+    }
+}
+
+
+
+
+?>
 
 
 
@@ -25,6 +42,19 @@
                     <p class="translate-x-4">Add Subject</p>
                 </button>
             </a>
+            <!-- alert -->
+
+            <?php
+            if (isset($_SESSION['delete_succ'])) {
+                $delete_succ = $_SESSION['delete_succ'];
+            }
+
+
+            ?>
+
+
+
+            <!-- alert -->
 
             <form action="">
                 <div class="relative">
@@ -67,15 +97,15 @@
 
                         ?>
                                 <tr class="text-center">
-                                    <td class="text-lg text-black font-semibold"> <?php echo $row['subject_id']?></td>
-                                    <td class="text-lg text-black font-semibold"><?php echo $row['subject_name']?> </td>
+                                    <td class="text-lg text-black font-semibold"> <?php echo $row['subject_id'] ?></td>
+                                    <td class="text-lg text-black font-semibold"><?php echo $row['subject_name'] ?> </td>
 
 
                                     <td class="py-2 w-80">
                                         <form method="post" onsubmit="return confirm('Are You Sure You want to delete?')" action="<?php $_SERVER['PHP_SELF'] ?>">
 
                                             <div class="group relative inline-block">
-                                                <a class="focus:outline-none pr-2" href="edit_subject.php?id=<?php echo $row['subject_id']?>">
+                                                <a class="focus:outline-none pr-2" href="edit_subject.php?id=<?php echo $row['subject_id'] ?>">
                                                     <i class="fa-solid fa-user-pen text-lg  w-12 h-12  p-2  duration-500 hover:bg-[#17082D] border-2 border-[#17082D] hover:text-white  text-[#17082D] rounded-full"></i>
                                                 </a>
 
@@ -88,8 +118,8 @@
 
                                             <div class="group relative inline-block">
 
-                                                <input name="user_id" type="hidden">
-                                                <button name="delete_user" value="delete" class="focus:outline-none pr-2">
+                                                <input name="subject_id" value="<?php echo $row['subject_id'] ?>" type="hidden">
+                                                <button name="delete_subject" value="delete" class="focus:outline-none pr-2">
                                                     <i class="fa-solid fa-trash text-lg  w-12 h-12  p-2  duration-500 hover:bg-red-700 border-2 border-red-700 hover:text-white  text-red-700 rounded-full"></i>
                                                 </button>
 
@@ -136,7 +166,7 @@
                         ?>
 
 
-                    
+
 
 
 
