@@ -1,17 +1,77 @@
-<?php require_once("./adminPartials/Admin_header.php")?>
+<?php ob_start()?>
+<?php require_once("./adminPartials/Admin_header.php") ?>
+
+
+
+<?php 
+
+if (isset($_POST['add_subject'])) {
+    $subject = mysqli_real_escape_string($database, $_POST['subject']);
+    $sql = "SELECT * FROM subjects WHERE subject_name = '$subject'";
+    $query = mysqli_query($database, $sql);
+    $row = mysqli_num_rows($query);
+    if ($row) {
+        $_SESSION['error_sub'] = "Subject Name Already Exist";
+    }else{
+        $sql2 = "INSERT INTO subjects(subject_name) VALUES ('$subject')";
+        $query2 = mysqli_query($database, $sql2);
+        if ($query2) {
+            $_SESSION['succ_message'] = "Subject Added Successfully";
+            header("Location:subject.php");
+        }else{
+            $_SESSION['error_sub'] = "Failed Please try again";
+        }
+    }
+}
+
+
+?>
 
 
 
 
+<div class="group absolute ml-[7%] mt-9 inline-block  ">
+    <a href="subject.php">
+        <button class="focus:outline-none  ">
+
+            <i class="fa-solid fa-arrow-left text-lg  w-12 h-12  p-2  duration-500 hover:bg-[#17082D] border-2 border-[#17082D] hover:text-white  text-[#17082D] rounded-full"></i>
+
+
+        </button>
+    </a>
+    <button
+        class="absolute -top-11 left-1/2 transform -translate-x-1/2 z-20  w-24 h-10 text-base font-bold text-white bg-[#17082D] rounded shadow-lg transition-transform duration-300 ease-in-out scale-0 group-hover:scale-100">Go Back</button>
+
+</div>
 
 
 
 
+<div class="w-[800px] h-[400px] bg-[#17082D] mx-auto relative top-24 overflow-hidden ">
+    <div class="">
+
+    </div>
+    <div class="w-[650px]  bg-white mx-auto relative top-20 p-10 shadow-md shrink rounded-sm ">
+        <h2 id="title_font" class="text-2xl font-bold text-[#17082D] text-center ">Add Subject</h2>
+        <form method="post" action="">
+            <div class=" pt-3">
+
+                <input required name="subject" placeholder="Subject Name" class=" rounded-md  text-black border-2 border-gray-300 px-4   py-2.5 w-full  focus:ring-1 focus:ring-purple-400 transition ease-in-out duration-150" type="text">
+
+            </div>
 
 
 
+            <div class="pt-3">
 
 
+                <button name="add_subject" class="w-full h-11 bg-[#17082D] text-white text-lg font-semibold hover:bg-[#17082df4] duration-300 rounded-sm">Add Subject</button>
 
+            </div>
+        </form>
 
-<?php require_once("./adminPartials/Admin_footer.php")?>
+    </div>
+
+</div>
+
+<?php require_once("./adminPartials/Admin_footer.php") ?>

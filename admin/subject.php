@@ -1,3 +1,5 @@
+
+<?php ob_start()?>
 <?php require_once('./adminPartials/Admin_header.php') ?>
 
 
@@ -44,17 +46,31 @@
                         <tr class="text-center">
                             <th><span class="text-lg text-[#309267] font-bold">Subject Id</span></th>
                             <th><span class="text-lg text-[#309267] font-bold">Subject Name</span></th>
-                             
+
 
                             <th colspan="2"><span class="text-xl text-[#309267] font-bold">Action</span></th>
                         </tr>
                     </thead>
                     <tbody>
+
+                        <?php
+                        $sql = "SELECT * FROM subjects";
+                        $query = mysqli_query($database, $sql);
+                        $rows = mysqli_num_rows($query);
+
+                        if ($rows) {
+                            while ($row = mysqli_fetch_assoc($query)) {
+
+
+
+
+
+                        ?>
                                 <tr class="text-center">
-                                    <td class="text-lg text-black font-semibold"> </td>
-                                    <td class="text-lg text-black font-semibold"> </td>
-                                    
-                                     
+                                    <td class="text-lg text-black font-semibold"> <?php echo $row['subject_id']?></td>
+                                    <td class="text-lg text-black font-semibold"><?php echo $row['subject_name']?> </td>
+
+
                                     <td class="py-2 w-80">
                                         <form method="post" onsubmit="return confirm('Are You Sure You want to delete?')" action="<?php $_SERVER['PHP_SELF'] ?>">
 
@@ -105,13 +121,26 @@
                                     </td>
 
                                 </tr>
-                                <tr>
-                                    <td colspan='3'>No Record Found</td>
 
-                                </tr>
+                            <?php
+                            }
+                        } else {
+                            ?>
+
+                            <tr>
+                                <td colspan='3'>No Record Found</td>
+
+                            </tr>
+                        <?php
+                        }
+                        ?>
 
 
                     
+
+
+
+
 
                     </tbody>
                 </table>
