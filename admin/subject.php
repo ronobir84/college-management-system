@@ -1,4 +1,4 @@
-<?php ob_start() ?>
+<?php ob_start();?>
 <?php require_once('./adminPartials/Admin_header.php') ?>
 
 <?php
@@ -45,8 +45,14 @@ if (isset($_POST['delete_subject'])) {
             <!-- alert -->
 
             <?php
-            if (isset($_SESSION['delete_succ'])) {
-                $delete_succ = $_SESSION['delete_succ'];
+             
+            
+
+            if (isset($_SESSION['succ_subject'])) {
+                $succ_subject = $_SESSION['succ_subject'];
+                echo "<span class='text-xl font-semibold text-green-700 relative  top-2'>$succ_subject</span>";
+                unset($_SESSION['succ_subject']);
+                 
             }
 
 
@@ -131,7 +137,7 @@ if (isset($_POST['delete_subject'])) {
                                             <div class="group relative inline-block ">
 
 
-                                                <a href="view_subject.php?id=<?php echo $row['subject_id']?>">
+                                                <a href="view_subject.php?id=<?php echo $row['subject_id'] ?>">
                                                     <button class="" type="button">
 
                                                         <i class="fa-solid fa-eye text-lg  w-12 h-12  p-2  duration-500 hover:bg-[#309267] border-2 border-[#309267] hover:text-white  text-[#309267] rounded-full"></i>

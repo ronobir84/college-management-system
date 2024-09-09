@@ -1,7 +1,7 @@
 <?php require_once('./adminPartials/Admin_header.php') ?>
 
 
- 
+
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -27,16 +27,21 @@
 
             <?php
 
-            if(isset($_SESSION['error_sms'])){
+            if (isset($_SESSION['error_sms'])) {
                 $error_sms = $_SESSION['error_sms'];
                 echo "<span class='text-xl font-semibold text-green-700 relative  top-2'>$error_sms</span>";
                 unset($_SESSION['error_sms']);
-
             }
             if (isset($_SESSION['error_msg'])) {
                 $error_msg = $_SESSION['error_msg'];
                 echo "<span class='text-xl font-semibold text-red-700 relative  top-2'>$error_msg</span>";
                 unset($_SESSION['error_msg']);
+            }
+
+            if (isset($_SESSION['teacher_succ'])) {
+                $teacher_succ = $_SESSION['teacher_succ'];
+                echo "<span class='text-xl font-semibold text-green-700 relative  top-2'>$teacher_succ</span>";
+                unset($_SESSION['teacher_succ']);
             }
 
 
@@ -103,7 +108,7 @@
                                     <td class="text-lg text-black font-semibold"><?php echo $row['teacher_id'] ?></td>
                                     <td class="text-lg text-black font-semibold"><?php echo $row['teacher_name'] ?> </td>
                                     <td class="text-lg text-black font-semibold"><?php echo $row['teacher_email'] ?></td>
-                                    <td class="text-lg text-black font-semibold"><?php echo $row['subject_name']?></td>
+                                    <td class="text-lg text-black font-semibold"><?php echo $row['subject_name'] ?></td>
                                     <td class="text-lg text-black font-semibold"><?php
                                                                                     if ($row['teacher_category'] == 1) {
                                                                                         echo "Principal";
@@ -117,7 +122,7 @@
                                         <form method="post" onsubmit="return confirm('Are You Sure You want to delete?')" action="<?php $_SERVER['PHP_SELF'] ?>">
 
                                             <div class="group relative inline-block">
-                                                <a class="focus:outline-none pr-2" href="edit_teacher.php?id=<?php echo $row['teacher_id']?>">
+                                                <a class="focus:outline-none pr-2" href="edit_teacher.php?id=<?php echo $row['teacher_id'] ?>">
                                                     <i class="fa-solid fa-user-pen text-lg  w-12 h-12  p-2  duration-500 hover:bg-[#17082D] border-2 border-[#17082D] hover:text-white  text-[#17082D] rounded-full"></i>
                                                 </a>
 
@@ -147,7 +152,7 @@
                                             <div class="group relative inline-block ">
 
 
-                                                <a href=" ">
+                                                <a href="view_teacher.php?id=<?php echo $row['teacher_id']?>">
                                                     <button class="" type="button">
 
                                                         <i class="fa-solid fa-eye text-lg  w-12 h-12  p-2  duration-500 hover:bg-[#309267] border-2 border-[#309267] hover:text-white  text-[#309267] rounded-full"></i>

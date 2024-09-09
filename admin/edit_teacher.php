@@ -22,14 +22,14 @@ if (isset($_POST['update_teacher'])) {
     if ($file != '') {
         //Set image upload size 
         if ($_FILES["images"]["size"] > 5000000) {
-            $error[] = 'Sorry, your image is too large. Upload less than 500 KB in size.';
+           $error[] = 'Sorry, your image is too large. Upload less than 500 KB in size.';
         }
         //Allow only JPG, JPEG, PNG & GIF 
         if (
             $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
             && $imageFileType != "gif"
         ) {
-            $error[] = 'Sorry, only JPG, JPEG, PNG & GIF files are allowed';
+           $error[] = 'Sorry, only JPG, JPEG, PNG & GIF files are allowed';
         }
     }
 
@@ -47,9 +47,10 @@ if (isset($_POST['update_teacher'])) {
             $result = mysqli_query($database, "UPDATE teachers SET teacher_name ='$teacher_name', teacher_email='$teacher_email',  teacher_subject='$subject'  WHERE teacher_id = '$id'");
         }
         if ($result) {
+            $_SESSION['teacher_succ'] = "Teacher Data Updated Successful";
             header("location:teacher.php?action=saved");
         } else {
-            echo 'Something went wrong';
+            $_SESSION['teacher_error'] = 'Something went wrong';
         }
     }
 }
@@ -58,7 +59,7 @@ if (isset($_POST['update_teacher'])) {
 if (isset($error)) {
 
     foreach ($error as $error) {
-        echo '<div class="message">' . $error . '</div><br>';
+        $_SESSION['type_error'] = $error;
     }
 }
 $res = mysqli_query($database, "SELECT * FROM teachers LEFT JOIN subjects ON teachers.teacher_subject = subjects.subject_id  WHERE teacher_id = '$id' limit 1");
@@ -72,9 +73,18 @@ if ($row = mysqli_fetch_array($res)) {
 }
 ?>
 
-<?php if (isset($update_sucess)) {
-    echo 'Image Updated successfully';
-} ?>
+<?php
+
+if (isset($update_succ)) {
+    $_SESSION['update_succ'] = 'Image Updated successfully';
+
+    header("Location:teacher.php");
+}else {
+    // $_SESSION['update_error'] = "Failed Please Try Again";
+} 
+
+
+?>
 
 
 
@@ -96,6 +106,16 @@ if ($row = mysqli_fetch_array($res)) {
 <div class="w-[800px] h-[600px] bg-[#17082D] mx-auto relative top-10 overflow-hidden ">
     <div class="">
 
+    <?php
+    if (isset($_SESSION['type_error'])) {
+        $type_error = $_SESSION['type_error'];
+        echo "<span class='text-xl font-semibold text-red-700  absolute  left-[22%]  top-4'>$type_error</span>";
+        unset($_SESSION['type_error']);
+    }
+    
+    
+    ?>
+
 
     </div>
     <div class="w-[650px]  bg-white mx-auto relative top-16 p-10 shadow-md shrink rounded-sm ">
@@ -113,7 +133,7 @@ if ($row = mysqli_fetch_array($res)) {
             </div>
             <div class="flex justify-between pt-3">
                 <input name="images" type="file" class="w-full p-2.5 border-2 border-gray-300 cursor-pointer px-4 rounded-md focus:ring-1   transition ease-in-out duration-150">
-                <img class="w-[52px] h-auto absolute  right-12 p-2" src="upload/<?php echo $teacher_image ?>" alt="">
+                <img class="w-[52px] h-[52px] rounded-md absolute  right-12 p-2" src="upload/<?php echo $teacher_image ?>" alt="">
             </div>
             <div class="pt-3">
                 <?php

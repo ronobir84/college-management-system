@@ -14,11 +14,19 @@ if (isset($_POST['add_user'])) {
 
 
     if (strlen($username) < 4 || strlen($username) > 100) {
-        $error = "User Name Must  4 Character";
+        $error = "<audio   autoplay>
+    <source src='../images/user_name.mp3' type='audio/mp3'>
+</audio>";
+
+        $_SESSION['user_error'] = "User Name Must  4 Character please";
     } elseif (strlen($password) < 4) {
-        $error = "Password Must be 4 Character";
+        $error = "<audio   autoplay>
+    <source src='../images/password_must4.mp3' type='audio/mp3'></audio>";
+        $_SESSION['user_error'] = "Password Must be 4 Character please";
     } elseif ($password != $confirm_pass) {
-        $error = "Password Not Match";
+        $error = "<audio   autoplay>
+    <source src='../images/password_notmathch.mp3' type='audio/mp3'></audio>";
+        $_SESSION['user_error'] = "Password doesn't Not Match";
     } else {
         include "../database.php";
         $sql = "SELECT * FROM users WHERE user_email = '$email'";
@@ -74,8 +82,13 @@ $_SESSION['message'] = $error;
         <?php
         if (isset($_SESSION['message'])) {
             $message = $_SESSION['message'];
-            echo "<h2 class='text-red-500 absolute font-bold text-xl gap-2  mt-3 left-[34%]'><i class='fa-solid fa-circle-exclamation '></i>  $message</h2>";
+            echo "<h2 class='text-red-500 absolute font-bold text-xl gap-2  mt-3 left-[34%]'>$message</h2>";
             unset($_SESSION['message']);
+        }
+        if (isset($_SESSION['user_error'])) {
+            $user_error = $_SESSION['user_error'];
+            echo "<h2 class='text-red-500 absolute font-bold text-xl gap-2  mt-3 left-[30%]'>$user_error</h2>";
+            unset($_SESSION['user_error']);
         }
 
         ?>
