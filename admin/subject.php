@@ -1,4 +1,4 @@
-<?php ob_start();?>
+<?php ob_start(); ?>
 <?php require_once('./adminPartials/Admin_header.php') ?>
 
 <?php
@@ -15,9 +15,15 @@ if (isset($_POST['delete_subject'])) {
 }
 
 
+if (!isset($_GET['page'])) {
+    $page = 1;
+} else {
+    $page = $_GET['page'];
+}
+$limit = 4;
 
-
-
+$offset = ($page - 1) * $limit;
+echo $offset;
 
 
 ?>
@@ -48,14 +54,13 @@ if (isset($_POST['delete_subject'])) {
             <!-- alert -->
 
             <?php
-             
-            
+
+
 
             if (isset($_SESSION['succ_subject'])) {
                 $succ_subject = $_SESSION['succ_subject'];
                 echo "<span class='text-xl font-semibold text-green-700 relative  top-2'>$succ_subject</span>";
                 unset($_SESSION['succ_subject']);
-                 
             }
 
 
@@ -94,7 +99,7 @@ if (isset($_POST['delete_subject'])) {
                     <tbody>
 
                         <?php
-                        $sql = "SELECT * FROM subjects LEFT JOIN teachers ON subjects.teacher_id = teachers.teacher_id";
+                        $sql = "SELECT * FROM subjects LEFT JOIN teachers ON subjects.teacher_id = teachers.teacher_id LIMIT $offset , $limit";
                         $query = mysqli_query($database, $sql);
                         $rows = mysqli_num_rows($query);
 
@@ -110,11 +115,11 @@ if (isset($_POST['delete_subject'])) {
                                     <td class="text-lg text-black font-semibold"> <?php echo $row['subject_id'] ?></td>
                                     <td class="text-lg text-black font-semibold"><?php echo $row['subject_name'] ?> </td>
 
-                                     
+
 
 
                                     <td class="text-lg text-black font-semibold">
-                                        <?php echo $row['teacher_name']?>
+                                        <?php echo $row['teacher_name'] ?>
                                     </td>
 
 
@@ -194,6 +199,40 @@ if (isset($_POST['delete_subject'])) {
 
 
             </div>
+
+            <!-- pagination   -->
+            <?php
+            $pagination = "SELECT * FROM subjects";
+            $run_q = mysqli_query($database, $pagination);
+            $total_post = mysqli_num_rows($run_q);
+            $pages = ceil($total_post / $limit);
+            if ($total_post > $limit) {
+
+
+
+            ?>
+                <div class="absolute left-[40%] mt-12">
+                    <div class="">
+                        <?php
+                        for ($i = 1; $i <= $pages; $i++) {
+
+                            if ($i == $page) {
+                                echo "<button class ='w-12 h-12 rounded-full  shadow-xl shadow-[#17082D]  border-2 border-[#17082D]  text-xl font-bold  bg-[#17082D] text-white duration-500 ml-2'>$i</button>";
+                            } else {
+                                echo "<a href='subject.php?page=$i'><button class ='w-12 h-12 border-2 rounded-full  border-[#17082D] shadow-xl shadow-[#17082D]   text-xl font-bold text-[#17082D]   hover:bg-[#17082D] hover:text-white duration-500 ml-2'>$i</button></a>";
+                            };
+                        }
+
+                        ?>
+
+
+
+                    </div>
+
+                </div>
+            <?php  } ?>
+            <!-- ------------------ -->
+
         </div>
     </div>
 
