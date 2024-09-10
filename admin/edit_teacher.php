@@ -22,18 +22,18 @@ if (isset($_POST['update_teacher'])) {
     if ($file != '') {
         //Set image upload size 
         if ($_FILES["images"]["size"] > 5000000) {
-           $error[] = 'Sorry, your image is too large. Upload less than 500 KB in size.';
+            $error[] = 'Sorry, your image is too large. Upload less than 500 KB in size.';
         }
         //Allow only JPG, JPEG, PNG & GIF 
         if (
             $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
             && $imageFileType != "gif"
         ) {
-           $error[] = 'Sorry, only JPG, JPEG, PNG & GIF files are allowed';
+            $error[] = 'Sorry, only JPG, JPEG, PNG & GIF files are allowed';
         }
     }
 
-    $subject = mysqli_real_escape_string($database, $_POST['subject']);
+    $teacher_category = mysqli_real_escape_string($database, $_POST['teacher_category']);
     if (!isset($error)) {
         if ($file != '') {
             $res = mysqli_query($database, "SELECT* from teachers WHERE teacher_id = '$id' limit 1");
@@ -42,9 +42,9 @@ if (isset($_POST['update_teacher'])) {
             }
             unlink($folder . $delete_image);
             move_uploaded_file($file, $target_file);
-            $result = mysqli_query($database, "UPDATE teachers SET  teacher_name='$teacher_name', teacher_email='$teacher_email',   teacher_image ='$image_file',  teacher_subject='$subject'  WHERE teacher_id = '$id'");
+            $result = mysqli_query($database, "UPDATE teachers SET  teacher_name='$teacher_name', teacher_email='$teacher_email',   teacher_image ='$image_file',   teacher_category='$teacher_category'  WHERE teacher_id = '$id'");
         } else {
-            $result = mysqli_query($database, "UPDATE teachers SET teacher_name ='$teacher_name', teacher_email='$teacher_email',  teacher_subject='$subject'  WHERE teacher_id = '$id'");
+            $result = mysqli_query($database, "UPDATE teachers SET teacher_name ='$teacher_name', teacher_email='$teacher_email',   teacher_category='$teacher_category'  WHERE teacher_id = '$id'");
         }
         if ($result) {
             $_SESSION['teacher_succ'] = "Teacher Data Updated Successful";
@@ -62,14 +62,12 @@ if (isset($error)) {
         $_SESSION['type_error'] = $error;
     }
 }
-$res = mysqli_query($database, "SELECT * FROM teachers LEFT JOIN subjects ON teachers.teacher_subject = subjects.subject_id  WHERE teacher_id = '$id' limit 1");
+$res = mysqli_query($database, "SELECT * FROM teachers   WHERE teacher_id = '$id' ");
 if ($row = mysqli_fetch_array($res)) {
     $teacher_image = $row['teacher_image'];
     $teacher_name = $row['teacher_name'];
     $teacher_email = $row['teacher_email'];
     $teacher_category = $row['teacher_category'];
-
-    $teacher_subject = $row['teacher_subject'];
 }
 ?>
 
@@ -79,9 +77,9 @@ if (isset($update_succ)) {
     $_SESSION['update_succ'] = 'Image Updated successfully';
 
     header("Location:teacher.php");
-}else {
+} else {
     // $_SESSION['update_error'] = "Failed Please Try Again";
-} 
+}
 
 
 ?>
@@ -106,15 +104,15 @@ if (isset($update_succ)) {
 <div class="w-[800px] h-[600px] bg-[#17082D] mx-auto relative top-10 overflow-hidden ">
     <div class="">
 
-    <?php
-    if (isset($_SESSION['type_error'])) {
-        $type_error = $_SESSION['type_error'];
-        echo "<span class='text-xl font-semibold text-red-700  absolute  left-[22%]  top-4'>$type_error</span>";
-        unset($_SESSION['type_error']);
-    }
-    
-    
-    ?>
+        <?php
+        if (isset($_SESSION['type_error'])) {
+            $type_error = $_SESSION['type_error'];
+            echo "<span class='text-xl font-semibold text-red-700  absolute  left-[35%]  top-4'>$type_error</span>";
+            unset($_SESSION['update_error']);
+        }
+
+
+        ?>
 
 
     </div>
@@ -135,6 +133,7 @@ if (isset($update_succ)) {
                 <input name="images" type="file" class="w-full p-2.5 border-2 border-gray-300 cursor-pointer px-4 rounded-md focus:ring-1   transition ease-in-out duration-150">
                 <img class="w-[52px] h-[52px] rounded-md absolute  right-12 p-2" src="upload/<?php echo $teacher_image ?>" alt="">
             </div>
+             
             <div class="pt-3">
                 <?php
 
@@ -142,20 +141,20 @@ if (isset($update_succ)) {
                 $query = mysqli_query($database, $sql);
 
                 if (isset($_POST['update_teacher'])) {
-                    
+
                     $category = mysqli_real_escape_string($database, $_POST['subject_category']);
                     $sql3 = "UPDATE teachers SET teacher_category = '$category' WHERE teacher_id = '$id'";
 
                     $query3 = mysqli_query($database, $sql3);
                 }
 
-                
+
 
 
                 ?>
 
 
-                <select name="subject_category" class=" border-2 border-gray-300 placeholder:text-gray-600  text-gray-600  rounded-md   py-2.5 w-full  px-4 focus:ring-1   transition ease-in-out duration-150" id="">
+                <select name="teacher_category" class=" border-2 border-gray-300 placeholder:text-gray-600  text-gray-600  rounded-md   py-2.5 w-full  px-4 focus:ring-1   transition ease-in-out duration-150" id="">
                     <?php
                     while ($category = mysqli_fetch_array($query)) {
 
@@ -186,45 +185,7 @@ if (isset($update_succ)) {
 
             </div>
 
-            <div class="pt-3">
 
-                <?php
-
-                $sql2 = "SELECT * FROM subjects";
-                $query2 = mysqli_query($database, $sql2);
-
-
-
-                ?>
-                <select name="subject" class=" border-2 border-gray-300 placeholder:text-gray-600  text-gray-600  rounded-md   py-2.5 w-full  px-4 ">
-                    <?php
-                    while ($subject = mysqli_fetch_array($query2)) {
-
-
-
-                    ?>
-
-                        <option value="<?php echo $subject['subject_id'] ?> "
-                            <?php
-                            if ($row['teacher_subject'] == $subject['subject_id']) {
-                                echo "selected";
-                            } else {
-                                echo "";
-                            }
-
-
-                            ?>>
-                            <?php echo $subject['subject_name'] ?>
-
-                        </option>
-
-                    <?php  } ?>
-
-
-
-                </select>
-
-            </div>
 
             <div class="pt-3">
 

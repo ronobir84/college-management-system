@@ -89,7 +89,7 @@
 
 
                         <?php
-                        $sql = "SELECT * FROM teachers LEFT JOIN subjects ON teachers.teacher_subject = subjects.subject_id";
+                        $sql = "SELECT * FROM teachers LEFT JOIN subjects ON teachers.teacher_id = subjects.teacher_id ";
                         $query = mysqli_query($database, $sql);
                         $rows = mysqli_num_rows($query);
                         if ($rows) {
@@ -108,7 +108,7 @@
                                     <td class="text-lg text-black font-semibold"><?php echo $row['teacher_id'] ?></td>
                                     <td class="text-lg text-black font-semibold"><?php echo $row['teacher_name'] ?> </td>
                                     <td class="text-lg text-black font-semibold"><?php echo $row['teacher_email'] ?></td>
-                                    <td class="text-lg text-black font-semibold"><?php echo $row['subject_name'] ?></td>
+                                    <td class="text-lg text-black font-semibold"><?php echo $row['subject_name']?></td>
                                     <td class="text-lg text-black font-semibold"><?php
                                                                                     if ($row['teacher_category'] == 1) {
                                                                                         echo "Principal";

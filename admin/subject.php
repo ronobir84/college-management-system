@@ -17,6 +17,9 @@ if (isset($_POST['delete_subject'])) {
 
 
 
+
+
+
 ?>
 
 
@@ -80,17 +83,18 @@ if (isset($_POST['delete_subject'])) {
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr class="text-center">
-                            <th><span class="text-lg text-[#309267] font-bold">Subject Id</span></th>
-                            <th><span class="text-lg text-[#309267] font-bold">Subject Name</span></th>
+                            <th><span class="text-lg text-[#309267] font-bold">Subjects Id</span></th>
+                            <th><span class="text-lg text-[#309267] font-bold">Subjects Name</span></th>
+                            <th><span class="text-lg text-[#309267] font-bold">Teachers Name</span></th>
 
 
-                            <th colspan="2"><span class="text-xl text-[#309267] font-bold">Action</span></th>
+                            <th colspan="2"><span class="text-xl text-[#309267] font-bold">Actions</span></th>
                         </tr>
                     </thead>
                     <tbody>
 
                         <?php
-                        $sql = "SELECT * FROM subjects";
+                        $sql = "SELECT * FROM subjects LEFT JOIN teachers ON subjects.teacher_id = teachers.teacher_id";
                         $query = mysqli_query($database, $sql);
                         $rows = mysqli_num_rows($query);
 
@@ -105,6 +109,13 @@ if (isset($_POST['delete_subject'])) {
                                 <tr class="text-center">
                                     <td class="text-lg text-black font-semibold"> <?php echo $row['subject_id'] ?></td>
                                     <td class="text-lg text-black font-semibold"><?php echo $row['subject_name'] ?> </td>
+
+                                     
+
+
+                                    <td class="text-lg text-black font-semibold">
+                                        <?php echo $row['teacher_name']?>
+                                    </td>
 
 
                                     <td class="py-2 w-80">

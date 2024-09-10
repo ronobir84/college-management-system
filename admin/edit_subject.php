@@ -25,7 +25,7 @@ if (isset($_POST['update_subject'])) {
         $_SESSION['succ_subject'] = "<audio   autoplay>
     <source src='../images/1725881556974db3z9y9-voicemaker.in-speech.mp3' type='audio/mp3'>
 </audio>";
-       
+
         header("Location:subject.php");
     } else {
         $_SESSION['error_subject'] = "Failed Please try Again";
@@ -71,6 +71,11 @@ if (isset($_POST['update_subject'])) {
             <div class=" pt-3">
 
                 <input required name="subject_name" value="<?php echo $row['subject_name'] ?>" class=" rounded-md  text-black border-2 border-gray-300 px-4   py-2.5 w-full  focus:ring-1 focus:ring-purple-400 transition ease-in-out duration-150" type="text">
+
+            </div>
+            <div class=" pt-3">
+
+                 
 
             </div>
 
